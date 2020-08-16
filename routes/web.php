@@ -20,4 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'IndexController@index')->name('index');
 Route::get('/products/{product}', 'ProductController@show')->name('products.show');
+
+Route::get('/cart', 'CartController@index')->name('cart.index');
+
+Route::get('/ajax/cart_items_count', 'CartController@getCartItemsCount');
+Route::post('/ajax/add_to_cart', 'CartController@addToCart');
+Route::post('/ajax/cart/decrease', 'CartController@decreaseCartItemQuantity');
+Route::post('/ajax/cart/increase', 'CartController@increaseCartItemQuantity');
 Route::get('/{category}', 'CategoryController@show')->name('categories.show');

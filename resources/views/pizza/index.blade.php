@@ -15,7 +15,8 @@
                                 <h6>{{ $product->name }}</h6>
                                 <p>{{ $product->description }}</p>
                                 <p class="price-tag"><b>${{ $product->price }}</b></p>
-                                <a href="" class="order-btn">Add to Cart</a>
+                                <a href="#" data-product-id="{{ $product->id }}" class="add-to-cart order-btn">
+                                    Add to Cart</a>
                             </div>
                         </div>
                     @endforeach
