@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
@@ -44,11 +45,13 @@
                         <div class="cart-contact">
                             <div class="mini-cart">
                                 <button class="cart-toggle-btn">
-                                    <span class="cart-count">2</span>
-                                    <i class="las la-shopping-bag"></i>
+                                    <a href="{{ route('cart.index') }}">
+                                        <span class="cart-count" id="cart-count"></span>
+                                        <i class="las la-shopping-bag"></i>
+                                    </a>
                                 </button>
                             </div>
-                            <a href="" class="boxed-btn top">Order Online</a>
+                            <a href="{{ route('cart.index') }}" class="boxed-btn top">Order Online</a>
                         </div>
                     </div>
                 </div>

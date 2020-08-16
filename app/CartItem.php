@@ -13,4 +13,18 @@ class CartItem extends Model
         'order_id',
         'sale_user_id',
     ];
+
+    protected $appends = [
+        'sum'
+    ];
+
+    public function getSumAttribute()
+    {
+        return $this->price * $this->quantity;
+    }
+
+    public function product()
+    {
+        return $this->BelongsTo(Product::class);
+    }
 }

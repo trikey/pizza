@@ -2,6 +2,12 @@ window.Popper = require('popper.js');
 
 window.$ = window.jQuery = require('jquery');
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 require('bootstrap');
 
 window._ = require('lodash');
