@@ -51,7 +51,7 @@
                                     </a>
                                 </button>
                             </div>
-                            <a href="{{ route('cart.index') }}" class="boxed-btn top">Order Online</a>
+                            <a href="{{ route('order.checkout') }}" class="boxed-btn top">Order Online</a>
                         </div>
                     </div>
                 </div>

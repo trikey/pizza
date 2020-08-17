@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Category;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,8 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('categories', cache()->remember('categories', 120, function () {
+        view()->share('categories', cache()->remember('categories', 120, function () {
             return Category::all();
         }));
+
+        app()->bind('cart-helper', \App\Lib\Sale\CartHelper::class);
     }
 }

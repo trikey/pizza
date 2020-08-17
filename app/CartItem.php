@@ -27,4 +27,9 @@ class CartItem extends Model
     {
         return $this->BelongsTo(Product::class);
     }
+
+    public function scopeNotOrdered($query)
+    {
+        return $query->whereOrderId(null);
+    }
 }

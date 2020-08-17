@@ -6,67 +6,39 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 use App\CartItem;
-use App\Lib\Sale\CartHelper;
-use App\Lib\Sale\SaleUserHelper;
+use Cart;
 
 class CartController extends Controller
 {
     public function index(Request $request)
     {
-        $saleUser = SaleUserHelper::getSaleUser($request);
-        $cartItems = CartHelper::getCartItemsBySaleUserId($saleUser->id);
+        $cartItems = Cart::getCartItems();
         return view('pizza.cart', ['cartItems' => $cartItems]);
     }
 
     public function getCartItemsCount(Request $request)
     {
-        $saleUser = SaleUserHelper::getSaleUser($request);
-        $count = CartHelper::getCartItemsCount($saleUser->id);
+        $count = Cart::getCartItemsCount();
         return response()->json(['count' => $count]);
     }
 
-    public function addToCart(Request $request)
+    public function addToCart(Request $request, Product $product)
     {
-        $productId = $request->get('product_id');
-        $product = Product::find($productId);
+        $quantity = $request->get('quantity');
+        Cart::addProductToCart($product, $quantity);
 
-        $saleUser = SaleUserHelper::getSaleUser($request);
-        $cartItem = CartItem::whereProductId($productId)->whereSaleUserId($saleUser->id)->first();
-        if ($cartItem) {
-            $cartItem->quantity++;
-            $cartItem->save();
-        }
-        else {
-            CartItem::create([
-                'product_id' => $product->id,
-                'quantity' => $request->get('quantity'),
-                'price' => $product->price,
-                'sale_user_id' => $saleUser->id
-            ]);
-        }
         return $this->getCartItemsCount($request);
     }
 
-    public function increaseCartItemQuantity(Request $request)
+    public function increaseCartItemQuantity(Request $request, CartItem $cartItem)
     {
-        $cartItemId = $request->get('id');
-        $cartItem = CartItem::find($cartItemId);
-        $cartItem->quantity++;
-        $cartItem->save();
+        Cart::increaseQuantity($cartItem);
         return $this->index($request);
     }
 
-    public function decreaseCartItemQuantity(Request $request)
+    public function decreaseCartItemQuantity(Request $request, CartItem $cartItem)
     {
-        $cartItemId = $request->get('id');
-        $cartItem = CartItem::find($cartItemId);
-        $cartItem->quantity--;
-        if ($cartItem->quantity > 0) {
-            $cartItem->save();
-        }
-        else {
-            CartItem::destroy($cartItemId);
-        }
+        Cart::decreaseQuantity($cartItem);
         return $this->index($request);
     }
 }

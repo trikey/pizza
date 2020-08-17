@@ -16,7 +16,12 @@ class SetSaleUser
      */
     public function handle($request, Closure $next)
     {
-        $saleUser = SaleUserHelper::getSaleUser($request);
-        return $next($request)->withCookie(SaleUserHelper::setSaleUserCode($saleUser));
+        if (!SaleUserHelper::getCurrentSaleUserId()) {
+            $saleUser = new SaleUserHelper($request);
+            $saleUser->updateSaleUserSession();
+            $cookie = $saleUser->makeSaleUserCodeCookie();
+            return $next($request)->withCookie($cookie);
+        }
+        return $next($request);
     }
 }

@@ -22,9 +22,14 @@ Route::get('/', 'IndexController@index')->name('index');
 Route::get('/products/{product}', 'ProductController@show')->name('products.show');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
-
-Route::get('/ajax/cart_items_count', 'CartController@getCartItemsCount');
-Route::post('/ajax/add_to_cart', 'CartController@addToCart');
-Route::post('/ajax/cart/decrease', 'CartController@decreaseCartItemQuantity');
-Route::post('/ajax/cart/increase', 'CartController@increaseCartItemQuantity');
+Route::get('/checkout', 'CheckoutController@checkoutPage')->name('order.checkout');
 Route::get('/{category}', 'CategoryController@show')->name('categories.show');
+
+Route::prefix('/ajax')->group(function() {
+    Route::get('cart/count', 'CartController@getCartItemsCount');
+    Route::post('cart/{product}/add', 'CartController@addToCart');
+    Route::post('cart/{cartItem}/decrease', 'CartController@decreaseCartItemQuantity');
+    Route::post('cart/{cartItem}/increase', 'CartController@increaseCartItemQuantity');
+
+    Route::post('checkout', 'CheckoutController@checkout');
+});

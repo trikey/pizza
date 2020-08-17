@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'user_cookie_name' => env('SALE_USER_ID_COOKIE_NAME', 'sale_user_id'),
+    'user_code_cookie_name' => env('SALE_USER_ID_COOKIE_NAME', 'sale_user_id'),
+    'user_id_session_name' => env('SALE_USER_ID_SESSION_NAME', 'sale_user_id'),
 ];
