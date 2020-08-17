@@ -1,6 +1,8 @@
 window.Popper = require('popper.js');
 
 window.$ = window.jQuery = require('jquery');
+require('../../node_modules/jquery.maskedinput/src/jquery.maskedinput.js');
+require('jquery-validation');
 
 $.ajaxSetup({
     headers: {

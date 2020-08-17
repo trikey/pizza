@@ -1,9 +1,7 @@
-function addToCart(productId)
-{
+function addToCart(product) {
     $.ajax({
-        url: '/ajax/add_to_cart',
+        url: '/ajax/cart/' + product + '/add',
         data: {
-            product_id: productId,
             quantity: 1,
         },
         type: 'POST',
@@ -13,10 +11,9 @@ function addToCart(productId)
     });
 }
 
-function getCartItemsCount()
-{
+function getCartItemsCount() {
     $.ajax({
-        url: '/ajax/cart_items_count',
+        url: '/ajax/cart/count',
         type: 'GET',
         dataType: 'json',
     }).done(function (data) {
@@ -24,34 +21,26 @@ function getCartItemsCount()
     });
 }
 
+function updateCart(action, id) {
+    $.ajax({
+        url: '/ajax/cart/' + id + '/' + action,
+        type: 'POST',
+    }).done(function (data) {
+        $('#cart-container').html($(data).find('#cart-container').html());
+        getCartItemsCount();
+    });
+}
+
 $(function () {
     getCartItemsCount();
     $(document).on('click', '.add-to-cart', function () {
-        addToCart($(this).attr('data-product-id'));
+        addToCart($(this).attr('data-product'));
         return false;
     });
     $(document).on('click', '.cart-minus', function () {
-        $.ajax({
-            url: '/ajax/cart/decrease',
-            data: {
-                id: $(this).attr('data-cart-item-id')
-            },
-            type: 'POST',
-        }).done(function (data) {
-            $('#cart-container').html($(data).find('#cart-container').html());
-            getCartItemsCount();
-        });
+        updateCart('decrease', $(this).attr('data-cart-item-id'));
     });
     $(document).on('click', '.cart-plus', function () {
-        $.ajax({
-            url: '/ajax/cart/increase',
-            data: {
-                id: $(this).attr('data-cart-item-id')
-            },
-            type: 'POST',
-        }).done(function (data) {
-            $('#cart-container').html($(data).find('#cart-container').html());
-            getCartItemsCount();
-        });
+        updateCart('increase', $(this).attr('data-cart-item-id'));
     });
 });
