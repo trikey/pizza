@@ -35,6 +35,13 @@ class SaleUserHelper
         return session(config('sale.user_id_session_name'), null);
     }
 
+    public static function attachUserToSaleUser(int $userId): void
+    {
+        $saleUser = SaleUser::find(self::getCurrentSaleUserId());
+        $saleUser->user_id = auth()->user()->getAuthIdentifier();
+        $saleUser->save();
+    }
+
     protected function getSaleUserFromRequest(Request $request): SaleUser
     {
         $saleUserCookie = $request->cookie($this->getSaleUserCookieName());
