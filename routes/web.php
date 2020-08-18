@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/products/{product}', 'ProductController@show')->name('products.show
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::get('/checkout', 'CheckoutController@checkoutPage')->name('order.checkout');
+
+Auth::routes();
+
 Route::get('/{category}', 'CategoryController@show')->name('categories.show');
 
 Route::prefix('/ajax')->group(function() {
