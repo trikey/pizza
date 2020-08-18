@@ -6,6 +6,7 @@ use App\Order;
 use App\OrderProperty;
 use App\OrderPropertyValue;
 use Illuminate\Support\Facades\DB;
+use Cart;
 
 class CheckoutHelper
 {
