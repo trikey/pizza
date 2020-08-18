@@ -23,7 +23,12 @@ Route::get('/', 'IndexController@index')->name('index');
 Route::get('/products/{product}', 'ProductController@show')->name('products.show');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
-Route::get('/checkout', 'CheckoutController@checkoutPage')->name('order.checkout');
+Route::get('/checkout', 'CheckoutController@checkoutPage')->name('orders.checkout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/orders', 'OrderController@index')->name('orders.index');
+    Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
+});
 
 Auth::routes();
 
