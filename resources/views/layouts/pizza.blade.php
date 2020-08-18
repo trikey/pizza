@@ -46,7 +46,7 @@
                                     </li>
                                 @else
                                     <li class="smooth-menu">
-                                        <a href="">{{ auth()->user()->name }}</a>
+                                        <a href="{{ route('orders.index') }}">Orders history</a>
                                     </li>
                                     <li class="smooth-menu">
                                         <div>
@@ -75,7 +75,7 @@
                                     </a>
                                 </button>
                             </div>
-                            <a href="{{ route('order.checkout') }}" class="boxed-btn top">Order Online</a>
+                            <a href="{{ route('orders.checkout') }}" class="boxed-btn top">Order Online</a>
                         </div>
                     </div>
                 </div>
