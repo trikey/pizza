@@ -37,6 +37,30 @@
                                         </a>
                                     </li>
                                 @endforeach
+                                @guest
+                                    <li class="smooth-menu">
+                                        <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                    <li class="smooth-menu">
+                                        <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @else
+                                    <li class="smooth-menu">
+                                        <a href="">{{ auth()->user()->name }}</a>
+                                    </li>
+                                    <li class="smooth-menu">
+                                        <div>
+                                            <a href="{{ route('logout') }}"
+                                               onclick="document.getElementById('logout-form').submit(); return false;">
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </li>
+                                @endguest
                             </ul>
                         </div>
                     </div>
