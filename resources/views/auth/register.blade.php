@@ -1,8 +1,8 @@
 @extends('layouts.pizza')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container flex-grid height-100">
+    <div class="row justify-content-center width-100">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
@@ -62,11 +62,9 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Register') }}
+                            </button>
                         </div>
                     </form>
                 </div>
