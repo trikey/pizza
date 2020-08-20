@@ -52,6 +52,10 @@ h6 {
     font-size: 20px;
 }
 
+.logo-web.flex-grid {
+    justify-content: flex-start;
+}
+
 .flex-grid {
     display: flex;
     flex-direction: row;
@@ -341,6 +345,11 @@ a {
     display: none;
 }
 
+.currency {
+    width: 60px;
+    margin-left: 10px;
+}
+
 .item {
     border-bottom: 1px solid #ddd;
     padding: 20px 0;
@@ -416,7 +425,18 @@ a {
 }
 
 @media (max-width: 1220px) {
+    .header .logo {
+        margin-right: 5px;
 
+        a {
+            font-size: 20px;
+            letter-spacing: 1px;
+            padding: 0 9px;
+        }
+    }
+    .currency {
+        margin-left: 0;
+    }
 
 }
 
@@ -429,11 +449,19 @@ a {
         .logo-mob {
             display: block;
             text-align: center;
+            padding-right: 10px;
 
             a {
                 font-size: 18px;
             }
         }
+
+        .col-5.flex-grid {
+            justify-content: flex-end;
+            padding: 0 10px;
+        }
+
+
 
         .main-menu ul {
             background: #1E201F;
@@ -554,6 +582,12 @@ a {
 
     .item-name {
         padding: 0px 0 0 10px;
+    }
+
+    .header {
+        .col-2 {
+            padding: 5px;
+        }
     }
 
 
