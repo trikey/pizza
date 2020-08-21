@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
         if (!app()->runningInConsole()) {
             view()->share('categories', cache()->remember('categories', 120, function () {
                 return Category::all();
