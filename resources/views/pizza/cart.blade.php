@@ -1,7 +1,7 @@
 @extends('layouts.pizza')
 
 @section('content')
-    <div class="container">
+    <div class="container" id="cart-container">
         @foreach($cartItems as $cartItem)
             <div class="row item">
                 <div class="col-lg-6 col-7">
@@ -17,10 +17,11 @@
                             <div class="number">{{ $cartItem->quantity }}</div>
                             <div class="cart-plus flex-grid" data-cart-item-id="{{ $cartItem->id }}"><span>+</span></div>
                         </div>
-                        <div class="item-total-price">{{ $cartItem->sum }}</div>
+                        <div class="item-total-price">{{ $cartItem->sum_formatted }}</div>
                     </div>
                 </div>
             </div>
         @endforeach
+        <a href="{{ route('orders.checkout') }}" class="button">Proceed to Checkout</a>
     </div>
 @endsection

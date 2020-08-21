@@ -43,4 +43,10 @@ $(function () {
     $(document).on('click', '.cart-plus', function () {
         updateCart('increase', $(this).attr('data-cart-item-id'));
     });
+    $(document).on('click', '.hamburger', function () {
+        $('#navigation').toggleClass('visible');
+    });
+    $(document).on('change', '.currency-selector', function () {
+        window.location = '?currency=' + $(this).val();
+    });
 });

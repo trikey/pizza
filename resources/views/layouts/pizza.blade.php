@@ -24,9 +24,11 @@
                 </div>
                 <div class="form-row currency">
                     <div class="my-1">
-                        <select class="form-control form-control-sm mr-sm-2">
-                            <option>$</option>
-                            <option>€</option>
+                        <select class="currency-selector form-control form-control-sm mr-sm-2">
+                            @foreach ($currencies as $currency)
+                                <option value="{{ $currency->code }}"
+                                        @if(Currency::isSelected($currency))selected="selected"@endif>{{ $currency->format }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -85,9 +87,11 @@
             <div class="col-lg-2 col-md-4 col-sm-4 col-5 flex-grid">
                 <div class="form-row currency logo-mob">
                     <div class="my-1">
-                        <select class="form-control form-control-sm mr-sm-2">
-                            <option>$</option>
-                            <option>€</option>
+                        <select class="currency-selector form-control form-control-sm mr-sm-2">
+                            @foreach ($currencies as $currency)
+                                <option value="{{ $currency->code }}"
+                                        @if(Currency::isSelected($currency))selected="selected"@endif>{{ $currency->format }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

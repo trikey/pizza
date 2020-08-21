@@ -17,7 +17,8 @@ class CreateCurrenciesTable extends Migration
             $table->id();
             $table->string('code', 18)->unique(); // max currency length
             $table->string('format');
-            $table->tinyInteger('base')->default(0);
+            $table->tinyInteger('is_base')->default(0);
+            $table->float('rate');
             $table->timestamps();
         });
     }

@@ -15,8 +15,8 @@ class CurrenciesSeeder extends Seeder
         \DB::table('currencies')->truncate();
 
         $currencies = collect([
-            ['code' => 'USD', 'format' => '$', 'base' => 0],
-            ['code' => 'EUR', 'format' => '€', 'base' => 1],
+            ['code' => 'USD', 'format' => '$', 'is_base' => 0, 'rate' => 1.18],
+            ['code' => 'EUR', 'format' => '€', 'is_base' => 1, 'rate' => 1],
         ]);
 
         $currencies->each(function ($currency) {

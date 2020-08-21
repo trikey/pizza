@@ -9,5 +9,7 @@ class Currency extends Model
     protected $fillable = [
         'code',
         'format',
+        'is_base',
+        'rate',
     ];
 }

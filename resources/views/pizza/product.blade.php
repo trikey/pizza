@@ -28,7 +28,7 @@
                 <h1>{{ $product->name }}</h1>
 
                 <p>{{ $product->description }}</p>
-                <p class="price-tag"><b>${{ $product->price }}</b></p>
+                <p class="price-tag"><b>{{ $product->formatted_price }}</b></p>
                 <a href="#" data-product="{{ $product->slug }}" class="add-to-cart order-btn">Add to Cart</a>
             </div>
         </div>

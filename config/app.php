@@ -227,6 +227,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => \App\Lib\Sale\Facades\CartHelperFacade::class,
+        'Currency' => \App\Lib\Sale\Facades\CurrencyHelperFacade::class,
 
     ],
 
