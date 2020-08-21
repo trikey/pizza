@@ -20,7 +20,7 @@
                         <div class="item-quantity flex-grid">
                             {{ $cartItem->quantity }}
                         </div>
-                        <div class="item-total-price">{{ $cartItem->sum }}</div>
+                        <div class="item-total-price">{{ $cartItem->sum_formatted }}</div>
                     </div>
                 </div>
             </div>
@@ -28,9 +28,9 @@
         <div class="row total">
             <div class="col-6"></div>
             <div class="col-6">
-                <div>Products price: {{ $order->products_price }}</div>
-                <div>Delivery price: {{ $order->delivery_price }}</div>
-                <h6>Total: {{ $order->total }}</h6>
+                <div>Products price: {{ $order->products_price_formatted }}</div>
+                <div>Delivery price: {{ $order->delivery_price_formatted }}</div>
+                <h6>Total: {{ $order->total_formatted }}</h6>
             </div>
         </div>
     </div>

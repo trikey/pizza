@@ -16,7 +16,7 @@
                 <tr>
                     <td>order <a href="{{ route('orders.show', ['order' => $order]) }}">#{{ $order->id }}</a></td>
                     <td>{{ $order->created_at }}</td>
-                    <td>{{ $order->total }}</td>
+                    <td>{{ $order->total_formatted }}</td>
                 </tr>
             @endforeach
             </tbody>

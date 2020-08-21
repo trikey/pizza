@@ -18,7 +18,7 @@
                                     <p>{{ $product->description }}</p>
                                 </div>
                                 <div class="flex-grid">
-                                    <p class="price-tag">${{ $product->price }}</p>
+                                    <p class="price-tag">{{ $product->formatted_price }}</p>
                                     <a href="#"  data-product="{{ $product->slug }}" class="add-to-cart order-btn">
                                         Add to Cart</a>
                                 </div>

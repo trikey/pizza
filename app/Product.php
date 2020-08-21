@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Currency;
 
 class Product extends Model
 {
@@ -14,6 +15,15 @@ class Product extends Model
         'category_id',
         'is_popular',
     ];
+
+    protected $appends = [
+        'formatted_price',
+    ];
+
+    public function getFormattedPriceAttribute()
+    {
+        return Currency::formatPrice($this->price);
+    }
 
     public function getRouteKeyName()
     {

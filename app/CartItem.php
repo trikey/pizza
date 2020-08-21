@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Currency;
 
 class CartItem extends Model
 {
@@ -15,12 +16,24 @@ class CartItem extends Model
     ];
 
     protected $appends = [
-        'sum'
+        'sum',
+        'price_formatted',
+        'sum_formatted',
     ];
 
     public function getSumAttribute()
     {
         return $this->price * $this->quantity;
+    }
+
+    public function getPriceFormattedAttribute()
+    {
+        return Currency::formatPrice($this->price);
+    }
+
+    public function getSumFormattedAttribute()
+    {
+        return Currency::formatPrice($this->getSumAttribute());
     }
 
     public function product()
