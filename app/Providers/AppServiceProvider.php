@@ -25,13 +25,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share('categories', cache()->remember('categories', 120, function () {
-            return Category::all();
-        }));
+        if (!app()->runningInConsole()) {
+            view()->share('categories', cache()->remember('categories', 120, function () {
+                return Category::all();
+            }));
 
-        view()->share('currencies', cache()->remember('currencies', 120, function () {
-            return Currency::all();
-        }));
+            view()->share('currencies', cache()->remember('currencies', 120, function () {
+                return Currency::all();
+            }));
+        }
 
         app()->bind('cart-helper', \App\Lib\Sale\CartHelper::class);
         app()->bind('currency-helper', \App\Lib\Sale\CurrencyHelper::class);
