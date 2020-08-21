@@ -5,9 +5,7 @@ namespace App\Lib\Sale\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class CartHelperFacade
- *
- * TODO add documentation for reference
+ * Class CurrencyHelperFacade
  *
  * @package App\Lib\Sale\Facades
  */

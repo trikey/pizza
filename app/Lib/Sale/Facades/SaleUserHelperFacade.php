@@ -5,11 +5,11 @@ namespace App\Lib\Sale\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class CartHelperFacade
+ * Class SaleUserHelperFacade
  *
  * @package App\Lib\Sale\Facades
  */
-class CartHelperFacade extends Facade
+class SaleUserHelperFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -18,6 +18,6 @@ class CartHelperFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'cart-helper';
+        return 'sale-user-helper';
     }
 }

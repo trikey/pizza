@@ -34,9 +34,4 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-    $(document).ready(function () {
-      $('.slider').bxSlider({ auto: true });
-    });
-    </script>
 @endsection

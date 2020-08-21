@@ -3,8 +3,8 @@
 @section('content')
     <div>
         <div class="container">
+            <h1>{{ $sectionName }}</h1>
             @foreach($products as $row => $productsInRow)
-                <h1>Popular</h1>
                 <div class="row">
                     @foreach($productsInRow as $index => $product)
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12">

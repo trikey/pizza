@@ -10,4 +10,9 @@ class SaleUser extends Model
         'user_id',
         'code',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

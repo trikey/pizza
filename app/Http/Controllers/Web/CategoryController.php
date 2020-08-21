@@ -10,6 +10,9 @@ class CategoryController extends Controller
 {
     public function show(Request $request, Category $category)
     {
-        return view('pizza.products', ['products' => $category->products->chunk(3)]);
+        return view('pizza.products', [
+            'products' => $category->products->chunk(3),
+            'sectionName' => $category->name
+        ]);
     }
 }

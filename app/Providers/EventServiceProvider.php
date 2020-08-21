@@ -19,7 +19,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\SetSaleUser',
+            'App\Listeners\AttachSaleUser',
+        ],
+        'Illuminate\Auth\Events\Logout' => [
+            'App\Listeners\DetachSaleUser',
         ],
     ];
 

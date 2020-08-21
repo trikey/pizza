@@ -12,12 +12,12 @@ class CheckoutHelper
 {
     public static function checkout($propertyValues)
     {
-        DB::transaction(function () use ($propertyValues) {
+        return DB::transaction(function () use ($propertyValues) {
             $cartItems = Cart::getCartItems();
             $productsPrice = $cartItems->sum(function ($cartItem) {
                 return $cartItem->price * $cartItem->quantity;
             });
-            $deliveryPrice = 10;
+            $deliveryPrice = config('sale.delivery_price');
             $totalPrice = $productsPrice + $deliveryPrice;
 
             $order = Order::create([
@@ -44,7 +44,39 @@ class CheckoutHelper
                 $cartItem->save();
             });
 
+            return $order;
+
         }, 3);
+
+    }
+
+    public static function getValidationRulesForFrontend()
+    {
+        $propertyRules = OrderProperty::required()->get()->toArray();
+
+        return array_reduce($propertyRules, function ($carry, $item) {
+            $rules = ['notEmpty' => true];
+            if ($item['is_phone']) {
+                $rules['checkMask'] = true;
+            }
+            $carry[$item['code']] = $rules;
+
+            return $carry;
+        }, []);
+    }
+
+    public static function getValidationRulesForBackend()
+    {
+        $propertyRules = OrderProperty::required()->get()->toArray();
+        return array_reduce($propertyRules, function ($carry, $item) {
+            $rules = ['required'];
+            if ($item['is_email']) {
+                $rules[] = 'email';
+            }
+            $carry[$item['code']] = $rules;
+
+            return $carry;
+        }, []);
 
     }
 }

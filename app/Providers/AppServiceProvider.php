@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Category;
 use App\Currency;
-use Currency as CurrencyHelper;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
 
         app()->bind('cart-helper', \App\Lib\Sale\CartHelper::class);
         app()->bind('currency-helper', \App\Lib\Sale\CurrencyHelper::class);
+        app()->bind('sale-user-helper', \App\Lib\Sale\SaleUserHelper::class);
     }
 }

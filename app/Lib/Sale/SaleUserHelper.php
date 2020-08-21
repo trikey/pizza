@@ -9,37 +9,53 @@ use \Symfony\Component\HttpFoundation\Cookie;
 
 class SaleUserHelper
 {
-    protected $saleUser;
     private $cookieName;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->cookieName = config('sale.user_code_cookie_name');
-        $this->saleUser = $this->getSaleUserFromRequest($request);
     }
 
-    public function updateSaleUserSession(): void
-    {
-        $this->saleUser->touch();
-        session()->put(config('sale.user_id_session_name'), $this->saleUser->id);
-    }
-
-    public function makeSaleUserCodeCookie(): Cookie
-    {
-        $cookieName = $this->getSaleUserCookieName();
-        return cookie()->make($cookieName, $this->saleUser->code, 60 * 24 * 30);
-    }
-
-    public static function getCurrentSaleUserId(): ?int
+    public function getCurrentSaleUserId(): ?int
     {
         return session(config('sale.user_id_session_name'), null);
     }
 
-    public static function attachUserToSaleUser(int $userId): void
+    public function initFromRequest(Request $request): void
+    {
+        $saleUser = $this->getSaleUserFromRequest($request);
+        $this->attachSaleUserCookie($saleUser);
+    }
+
+    public function attachUserToSaleUser(int $userId): void
     {
         $saleUser = SaleUser::find(self::getCurrentSaleUserId());
-        $saleUser->user_id = auth()->user()->getAuthIdentifier();
+        $saleUser->user_id = $userId;
         $saleUser->save();
+    }
+
+    public function attachSaleUserCookie(SaleUser $saleUser): void
+    {
+        $this->updateSaleUserSession($saleUser);
+        $cookie = $this->makeSaleUserCodeCookie($saleUser);
+        cookie()->queue($cookie);
+    }
+
+    public function detachSaleUserCookie()
+    {
+        cookie()->queue(cookie()->forget($this->getSaleUserCookieName()));
+    }
+
+    protected function makeSaleUserCodeCookie(SaleUser $saleUser): Cookie
+    {
+        $cookieName = $this->getSaleUserCookieName();
+        return cookie()->make($cookieName, $saleUser->code, 60 * 24 * 30);
+    }
+
+    protected function updateSaleUserSession(SaleUser $saleUser): void
+    {
+        $saleUser->touch();
+        session()->put(config('sale.user_id_session_name'), $saleUser->id);
     }
 
     protected function getSaleUserFromRequest(Request $request): SaleUser

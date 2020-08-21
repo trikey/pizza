@@ -15,53 +15,6 @@
                 </div>
             @endforeach
             <div class="text-danger" id="error-msg"></div>
-            <input type="submit" class="btn btn-primary" value="Submit"/>
         </form>
     </div>
-    <script type="text/javascript">
-    $.validator.addMethod('notEmpty', function (value, element) {
-      return value === '' || value.trim().length !== 0;
-    });
-
-    $.validator.addMethod('checkMask', function (value, element) {
-      return /\+\d{1} \(\d{3}\) \d{3}-\d{2}-\d{2}/g.test(value);
-    });
-
-    $('#phone').mask('+7 (999) 999-99-99', { autoclear: false });
-
-    $('#checkout-form').validate({
-      onsubmit: true,
-      errorClass: 'is-invalid',
-      validClass: 'is-valid',
-      rules: {
-          @foreach($properties as $property)
-          '{{$property->code}}': {
-              @if ($property->required)
-              notEmpty: true,
-              @endif
-              @if ($property->is_phone)
-              checkMask: true,
-              @endif
-          },
-          @endforeach
-      },
-      submitHandler: function (form) {
-        var data = $(form).serialize();
-        var error = $('#error-msg');
-        error.hide();
-        $.ajax({
-          url: '/ajax/checkout',
-          data: data,
-          type: 'POST',
-          dataType: 'json',
-        }).done(function (data) {
-          $(form).replaceWith(data.message);
-          $('#cart-count').text(0);
-        }).catch(function (data, message) {
-          error.text(message).show();
-        });
-        return false;
-      }
-    });
-    </script>
 @endsection

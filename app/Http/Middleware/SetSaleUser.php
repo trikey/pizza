@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Lib\Sale\SaleUserHelper;
+use SaleUser;
 use Closure;
 
 class SetSaleUser
@@ -16,11 +16,8 @@ class SetSaleUser
      */
     public function handle($request, Closure $next)
     {
-        if (!SaleUserHelper::getCurrentSaleUserId()) {
-            $saleUser = new SaleUserHelper($request);
-            $saleUser->updateSaleUserSession();
-            $cookie = $saleUser->makeSaleUserCodeCookie();
-            return $next($request)->withCookie($cookie);
+        if (!SaleUser::getCurrentSaleUserId()) {
+            SaleUser::initFromRequest($request);
         }
         return $next($request);
     }
