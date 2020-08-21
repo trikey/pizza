@@ -22,4 +22,9 @@ class OrderProperty extends Model
     {
         return $this->is_email ? 'email' : 'text';
     }
+
+    public function scopeRequired($query)
+    {
+        return $query->where('required', 1);
+    }
 }

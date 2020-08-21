@@ -36,6 +36,7 @@ Route::get('/{category}', 'CategoryController@show')->name('categories.show');
 
 Route::prefix('/ajax')->group(function() {
     Route::get('cart/count', 'CartController@getCartItemsCount');
+    Route::get('checkout/validation_rules', 'CheckoutController@getValidationRules');
     Route::post('cart/{product}/add', 'CartController@addToCart');
     Route::post('cart/{cartItem}/decrease', 'CartController@decreaseCartItemQuantity');
     Route::post('cart/{cartItem}/increase', 'CartController@increaseCartItemQuantity');

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container" id="cart-container">
-        @foreach($cartItems as $cartItem)
+        @forelse($cartItems as $cartItem)
             <div class="row item">
                 <div class="col-lg-6 col-7">
                     <div class="row">
@@ -13,15 +13,22 @@
                 <div class="col-lg-6 col-5">
                     <div class="flex-grid">
                         <div class="item-quantity flex-grid">
-                            <div class="cart-minus flex-grid" data-cart-item-id="{{ $cartItem->id }}"><span>-</span></div>
+                            <div class="cart-minus flex-grid" data-cart-item-id="{{ $cartItem->id }}"><span>-</span>
+                            </div>
                             <div class="number">{{ $cartItem->quantity }}</div>
-                            <div class="cart-plus flex-grid" data-cart-item-id="{{ $cartItem->id }}"><span>+</span></div>
+                            <div class="cart-plus flex-grid" data-cart-item-id="{{ $cartItem->id }}"><span>+</span>
+                            </div>
                         </div>
                         <div class="item-total-price">{{ $cartItem->sum_formatted }}</div>
                     </div>
                 </div>
             </div>
-        @endforeach
-        <a href="{{ route('orders.checkout') }}" class="button">Proceed to Checkout</a>
+        @empty
+            <p>You have not added anything to cart yet</p>
+        @endforelse
+
+        @if($cartItems->count() > 0)
+            <a href="{{ route('orders.checkout') }}" class="checkout-btn">Proceed to Checkout</a>
+        @endif
     </div>
 @endsection

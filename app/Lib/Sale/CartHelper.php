@@ -4,6 +4,7 @@ namespace App\Lib\Sale;
 
 use App\CartItem;
 use App\Product;
+use SaleUser;
 
 class CartHelper
 {
@@ -11,7 +12,7 @@ class CartHelper
 
     public function __construct()
     {
-        $this->saleUserId = SaleUserHelper::getCurrentSaleUserId();
+        $this->saleUserId = SaleUser::getCurrentSaleUserId();
     }
 
     public function getCartItems()

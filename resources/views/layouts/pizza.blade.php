@@ -127,10 +127,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-8">
-                    <div class="social-area">
-                        <a href=""><i class="icon facebook"></i></a>
-                        <a href=""><i class="icon instagram"></i></a>
-                        <a href=""><i class="icon twitter"></i></a>
+                    <div class="social-area text-center">
+                        This website use cookies.
                     </div>
                 </div>
             </div>

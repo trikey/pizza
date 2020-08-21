@@ -597,10 +597,27 @@ a {
 #navigation.visible {
     display: block;
 }
+.checkout-btn {
+    display: inline-block;
+    background: #FF6900;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+}
+.checkout-btn:hover {
+     color: #fbe5d6;
+     text-decoration: none;
+ }
 
 
+.btn.auth-btn {
+    display: inline-block;
+}
 
 
-
-
-
+.is-invalid {
+    color: #dc3545;
+}

@@ -2,13 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Lib\Sale\SaleUserHelper;
-use App\SaleUser;
+use SaleUser;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SetSaleUser
+class AttachSaleUser
 {
     /**
      * Create the event listener.
@@ -27,7 +26,11 @@ class SetSaleUser
      */
     public function handle(Login $event)
     {
-        $userId = $event->user->getAuthIdentifier();
-        SaleUserHelper::attachUserToSaleUser($userId);
+        if ($event->user->saleUser) {
+            SaleUser::attachSaleUserCookie($event->user->saleUser);
+        }
+        else {
+            SaleUser::attachUserToSaleUser($event->user->getAuthIdentifier());
+        }
     }
 }

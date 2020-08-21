@@ -10,6 +10,9 @@ class IndexController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pizza.products', ['products' => Product::popular()->with('images')->get()->chunk(3)]);
+        return view('pizza.products', [
+            'products' => Product::popular()->with('images')->get()->chunk(3),
+            'sectionName' => 'Popular'
+        ]);
     }
 }

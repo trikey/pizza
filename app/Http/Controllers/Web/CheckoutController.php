@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CheckoutRequest;
 use App\OrderProperty;
 use Illuminate\Http\Request;
 use Cart;
@@ -21,7 +22,14 @@ class CheckoutController extends Controller
         return view('pizza.checkout', ['properties' => $properties]);
     }
 
-    public function checkout(Request $request)
+    public function getValidationRules(Request $request)
+    {
+        $rules = CheckoutHelper::getValidationRulesForFrontend();
+
+        return response()->json(['rules' => $rules]);
+    }
+
+    public function checkout(CheckoutRequest $request)
     {
         if (!Cart::getCartItemsCount()) {
             return response()->json(['message' => 'no items for checkout'], 422);
@@ -31,8 +39,9 @@ class CheckoutController extends Controller
             OrderProperty::all()->pluck('code')->toArray()
         );
 
-        CheckoutHelper::checkout($propertyValues);
+        $order = CheckoutHelper::checkout($propertyValues);
+        $responseMessage = "Thank you for order. The order number is {$order->id}";
 
-        return response()->json(['message' => 'Thank you for order']);
+        return response()->json(['message' => $responseMessage]);
     }
 }
