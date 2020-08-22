@@ -133,8 +133,11 @@ class ProductsSeeder extends Seeder
 
             $images = collect(File::files(storage_path("app/public/{$product->category->slug}/{$product->id}")));
             $images->each(function (SplFileInfo $imageFile) use ($product) {
+                $img = file_get_contents($imageFile->getRealPath());
+                $base64 = base64_encode($img);
                 $product->images()->create([
                     'disk' => 'public',
+                    'base64' => $base64,
                     'path' => str_replace(storage_path('app/public/'), '', $imageFile->getPathname()),
                 ]);
             });

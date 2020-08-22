@@ -12,6 +12,7 @@ class Image extends Model
         'disk',
         'imageable_type',
         'imageable_id',
+        'base64',
     ];
 
     protected $appends = [
@@ -25,6 +26,6 @@ class Image extends Model
 
     public function getUrlAttribute()
     {
-        return asset($this->path);
+        return 'data:image/jpeg;base64,' . $this->base64;
     }
 }
